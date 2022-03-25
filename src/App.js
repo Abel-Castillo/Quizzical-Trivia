@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import { useState} from 'react'
 import uniqid from 'uniqid';
 import './index.css';
 import QuizCover from './components/QuizCover'
