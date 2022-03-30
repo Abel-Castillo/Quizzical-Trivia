@@ -35,3 +35,6 @@ body {
   padding: 10px 50px;
   font-size: 20px;
 }
+.answer--selected {
+  background-color: aqua;
+}
