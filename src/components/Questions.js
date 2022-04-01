@@ -1,8 +1,10 @@
 export default function Questions (props){
     const {question, handleAnswers} = props
     const typeBoolean = <div>
-                <input type='button' value='True' name='true' onClick={(event)=>handleAnswers(event,question.id)}/>
-                <input type='button' value='False' name='false' onClick={(event)=>handleAnswers(event,question.id)}/>
+                <input className={'True' === question.selectedAnswer && 'answer--selected'} 
+                type='button' value='True' onClick={(event)=>handleAnswers(event,question.id)}/>
+                <input className={'False' === question.selectedAnswer && 'answer--selected'}
+                type='button' value='False' onClick={(event)=>handleAnswers(event,question.id)}/>
             </div>  
         
     const typeMultiple = [...question.incorrect_answers,question.correct_answer ]
@@ -15,9 +17,8 @@ export default function Questions (props){
             {question.type === 'multiple' && typeMultiple.map(answer => 
                 <input type='button' 
                     value={answer} 
-                    name={answer} 
                     className={answer === question.selectedAnswer && 'answer--selected'}
-                    onClick={(event)=>handleAnswers(event,question.id)}/>)}
+                    onClick={(event)=>handleAnswers(event,question.id)}/>)}        
         </div>
     )
 }

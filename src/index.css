@@ -38,3 +38,13 @@ body {
 .answer--selected {
   background-color: aqua;
 }
+
+.incorrect--answer {
+  background-color: tomato;
+}
+.correct--answer {
+  background-color: green;
+}
+.right--answer {
+  background-color: lightblue;
+}
