@@ -1,35 +1,37 @@
+import uniqid from 'uniqid';
+
 export default function AnswerPage (props){
     const {question} = props
-    const allQuestions = [...question.incorrect_answers, question.correct_answer]    
-    
-
-    
-    console.log(question)
                 
-    const checkResults = allQuestions.map(qst => {
+    const checkResults = question.all_answers.map(qst => {
             
             if(question.correct_answer === qst && question.selectedAnswer === qst){
                 return <button 
+                key={uniqid()}
                 className='correct--answer question-choice'
                 value={qst}><span dangerouslySetInnerHTML={{ __html: qst}}></span></button>
             }
             if(question.correct_answer === qst && question.selectedAnswer === ''){
                 return <button 
+                key={uniqid()}
                 className='unselected-answer right--answer question-choice'
                 value={qst}><span dangerouslySetInnerHTML={{ __html: qst}}></span></button>
             }
             if(question.correct_answer === qst){
                 return <button 
+                key={uniqid()}
                 className='unselected-answer right--answer question-choice'
                 value={qst}><span dangerouslySetInnerHTML={{ __html: qst}}></span></button>
             }
             if(question.selectedAnswer !== qst) {
                 return <button 
+                key={uniqid()}
                 className='unselected-answer question-choice'
                 value={qst}><span dangerouslySetInnerHTML={{ __html: qst}}></span></button>
             }
             if(question.selectedAnswer !== question.correct_answer ){
                 return <button 
+                key={uniqid()}
                 className='incorrect--answer question-choice'
                 value={qst}><span dangerouslySetInnerHTML={{ __html: qst}}></span></button>
             }

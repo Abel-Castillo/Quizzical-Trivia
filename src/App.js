@@ -12,23 +12,44 @@ function App() {
    const [answerPage, setAnswerPage]= useState(false)
   // initialitze the questions
   const [questions, setQuestions] = useState([])
-  let restartQuiz = ''
+  //setUpQuiz detemines when to fetch new API data
+  const [setUpQuiz, setSetUpQuiz] = useState(false)
  useEffect(()=>{
      fetch('https://opentdb.com/api.php?amount=10')
       .then(response => response.json())
       .then(data => data.results)
       .then(data => {
        const dataAPI = data.map(d=> ({...d,id:uniqid(),selectedAnswer:''}))
+       setSetUpQuiz(false)
        setQuestions(dataAPI)
       })
-  },[coverPage]) 
+  },[setUpQuiz]) 
 
   console.log(questions)
   
   function startQuiz (){
-    // update the true or false coverPage
+    // Starting the quiz will randomize the multiple choice answers
+    randomizeChoices()
+    // update the true to false coverPage to hide coverPage
     setCoverPage(false)
   }
+  function randomizeChoices () {
+    const randomAllAnswers = questions.map(question =>{
+      // create a new property all_answers to store all the random multiple choices
+      let all_answers = [...question.incorrect_answers]
+      const randomIndex = Math.floor(Math.random()* (question.incorrect_answers.length +1))
+      // don't randomize choices for True or False questions
+      if(question.incorrect_answers.length === 1){
+        all_answers = ['True', 'False']
+      } else{
+        all_answers.splice(randomIndex,0,question.correct_answer)
+      }
+      
+      return {...question, all_answers}
+    })
+    setQuestions(randomAllAnswers)
+  }
+
   function handleAnswers (question, id) {
     // Copy the questions state to modify the matching id's
     const qst = [...questions]
@@ -48,7 +69,7 @@ function App() {
       setQuizResults({questionsCorrect: answered, numberOfQuestions})
     }
     function resetQuiz (){
-    
+      setSetUpQuiz(true)
       setCoverPage(true)
       setAnswerPage(false)
     }
