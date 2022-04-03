@@ -1,15 +1,20 @@
 :root {
   --primary-text-color: #293264;
   --button-background: #4d5b9e;
+  --selected-answer: #d6dbf5;
+  --correct-answer: #94d7a2;
+  --wrong-answer: #f8bcbc;
+}
+* {
+  margin: 0;
 }
 body {
-  margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  font: var(--primary-text-color);
+  color: var(--primary-text-color);
 }
 
 .cover--container {
@@ -17,34 +22,94 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  width: 550px;
+  max-width: 1000px;
   margin: 0 auto;
   text-align: center;
   height: 100vh;
 }
-
+.cover--title {
+  margin-bottom: 30px;
+  font-size: 100px;
+  font-weight: 700;
+}
+.cover--slogan {
+  font-size: 80px;
+  margin-bottom: 30px;
+}
+/* Buttons */
 .btn {
   background-color: var(--button-background);
   color: white;
   border: none;
-  border-radius: 5px;
+  border-radius: 15px;
   cursor: pointer;
 }
 
 .cover--btn {
   padding: 10px 50px;
-  font-size: 20px;
+  font-size: 50px;
 }
+.btn--check-answer,
+.btn--play-again {
+  padding: 15px 45px;
+  font-size: 20px;
+  margin-top: 30px;
+}
+.btn--play-again {
+  margin-top: 0;
+}
+
+/* Questions Page */
+.questions-page--container,
+.answer-page--container {
+  margin-top: 50px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.questions--container {
+  width: 80%;
+  font-weight: 700;
+  font-size: 20px;
+  border-bottom: 1px solid var(--selected-answer);
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.question-choice {
+  border: 1px solid var(--primary-text-color);
+  color: var(--primary-text-color);
+  border-radius: 8px;
+  padding: 3px 10px;
+  margin: 10px 20px 20px 0;
+}
+
+/* Answer Page */
 .answer--selected {
-  background-color: aqua;
+  background-color: var(--selected-answer);
 }
 
 .incorrect--answer {
-  background-color: tomato;
+  background-color: var(--wrong-answer);
+  opacity: 50%;
+}
+.unselected-answer {
+  opacity: 50%;
 }
 .correct--answer {
-  background-color: green;
+  background-color: var(--correct-answer);
 }
 .right--answer {
-  background-color: lightblue;
+  background-color: var(--correct-answer);
+}
+
+.answer-page--results {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+  font-size: 20px;
+  margin-top: 20px;
+  margin-bottom: 30px;
+}
+.answer-page--results > p {
+  margin-right: 20px;
 }

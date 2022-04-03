@@ -29,15 +29,14 @@ function App() {
     // update the true or false coverPage
     setCoverPage(false)
   }
-  function handleAnswers (e, id) {
+  function handleAnswers (question, id) {
     // Copy the questions state to modify the matching id's
     const qst = [...questions]
-    const questionNumber = questions.findIndex(q => q.id === id)
+    const questionNumber = qst.findIndex(q => q.id === id)
     // if the id's match update the selectedAnswer with the choosen answer
-    qst[questionNumber].selectedAnswer= e.target.value
+    qst[questionNumber].selectedAnswer= question
     // update the state with the new modified questions array
     setQuestions(qst)
-
     }
 
     function checkAnswers () {
@@ -59,17 +58,21 @@ function App() {
       {/* if coverPage is true show coverPage else display the questions */}
       {coverPage && <QuizCover startQuiz={startQuiz}/>} 
       {/* if coverPage is false and answer page is false show questions */}
-      {coverPage === answerPage && <div>
+      {coverPage === answerPage && <div className ='questions-page--container'>
         {questions.map(question => <Questions question={question} key={question.id} handleAnswers={handleAnswers}/>)}
-        <button onClick={checkAnswers}>Check Answer</button>
+        <button className ='btn btn--check-answer' onClick={checkAnswers}>Check Answer</button>
         </div>  
       }
       {/* if answer pgae is true show answers */}
-      {answerPage && <div>
-        {questions.map(question => <AnswerPage question={question} key={question.id}/>)}
-        <p>You scored{quizResults.questionsCorrect}/{quizResults.numberOfQuestions} correct answers</p>
-        <button onClick={resetQuiz}>Play Again</button>
-        </div>  }
+      {answerPage && 
+        <div className ='answer-page--container'>
+          {questions.map(question => <AnswerPage question={question} key={question.id}/>)}
+          <div className='answer-page--results'>
+            <p>You scored {quizResults.questionsCorrect}/{quizResults.numberOfQuestions} correct answers</p>
+            <button className ='btn btn--play-again'onClick={resetQuiz}>Play Again</button>
+          </div>
+        </div>  
+      }
       
     </div>
   );
